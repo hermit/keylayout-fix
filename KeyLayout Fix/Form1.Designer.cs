@@ -37,10 +37,10 @@
       this.label1 = new System.Windows.Forms.Label();
       this.comboBoxLayoutText = new System.Windows.Forms.ComboBox();
       this.dgv = new System.Windows.Forms.DataGridView();
-      this.entryBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.keyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.layoutTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.layoutFileDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.entryBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.groupBox1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.entryBindingSource)).BeginInit();
@@ -55,7 +55,7 @@
       this.comboBoxKeyName.Name = "comboBoxKeyName";
       this.comboBoxKeyName.Size = new System.Drawing.Size(327, 20);
       this.comboBoxKeyName.TabIndex = 2;
-      this.comboBoxKeyName.Text = "411$";
+      this.comboBoxKeyName.Text = "0411$";
       this.comboBoxKeyName.TextUpdate += new System.EventHandler(this.comboBoxKeyName_TextUpdate);
       // 
       // label2
@@ -140,13 +140,10 @@
       this.dgv.ImeMode = System.Windows.Forms.ImeMode.Disable;
       this.dgv.Location = new System.Drawing.Point(13, 118);
       this.dgv.Name = "dgv";
+      this.dgv.RowTemplate.Height = 21;
       this.dgv.Size = new System.Drawing.Size(425, 153);
       this.dgv.TabIndex = 3;
       this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellValueChanged);
-      // 
-      // entryBindingSource
-      // 
-      this.entryBindingSource.DataSource = typeof(KeyLayout_Fixer.Form1.Entry);
       // 
       // keyNameDataGridViewTextBoxColumn
       // 
@@ -172,6 +169,10 @@
       this.layoutFileDataGridViewTextBoxColumn.HeaderText = "LayoutFile";
       this.layoutFileDataGridViewTextBoxColumn.Name = "layoutFileDataGridViewTextBoxColumn";
       this.layoutFileDataGridViewTextBoxColumn.Width = 83;
+      // 
+      // entryBindingSource
+      // 
+      this.entryBindingSource.DataSource = typeof(KeyLayout_Fixer.Form1.Entry);
       // 
       // Form1
       // 
