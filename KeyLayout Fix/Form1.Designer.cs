@@ -126,6 +126,8 @@
       // 
       // dgv
       // 
+      this.dgv.AllowDrop = true;
+      this.dgv.AllowUserToOrderColumns = true;
       this.dgv.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 		  | System.Windows.Forms.AnchorStyles.Left)
 		  | System.Windows.Forms.AnchorStyles.Right)));
@@ -135,6 +137,7 @@
             this.layoutTextDataGridViewTextBoxColumn,
             this.layoutFileDataGridViewTextBoxColumn});
       this.dgv.DataSource = this.entryBindingSource;
+      this.dgv.ImeMode = System.Windows.Forms.ImeMode.Disable;
       this.dgv.Location = new System.Drawing.Point(13, 118);
       this.dgv.Name = "dgv";
       this.dgv.Size = new System.Drawing.Size(425, 153);
