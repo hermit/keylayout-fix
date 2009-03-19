@@ -92,18 +92,16 @@ namespace KeyLayout_Fixer
     //
 #if USE_CLASS_ENTRY
     private class Entry {
-      public Entry(string keyName) {
-	KeyName = keyName;
-      }
-
       private string _keyName;
       private RegistryKey _key;
+
+      public Entry(string keyName) {
+	_keyName = keyName.ToUpper();
+	_key = Registry.LocalMachine.OpenSubKey(registryPath + @"\" + _keyName, true);
+      }
+
       public string KeyName {
 	get { return _keyName; }
-	private set {
-	  _keyName = value.ToUpper();
-	  _key = Registry.LocalMachine.OpenSubKey(registryPath + @"\" + _keyName, true);
-	}
       }
       public string LayoutText {
 	get { return _key.GetValue("Layout Text").ToString(); }
