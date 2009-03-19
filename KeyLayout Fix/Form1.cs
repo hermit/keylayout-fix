@@ -144,20 +144,18 @@ namespace KeyLayout_Fixer
       if (! Regex.IsMatch(name, comboBoxKeyName.Text, RegexOptions.IgnoreCase))
 	return;
 
-      var key = rKey.OpenSubKey(name);
+      var entry = new Entry(name);
 
-      if (! Regex.IsMatch(key.GetValue("Layout Text").ToString(),
-			  comboBoxLayoutText.Text,
+      if (! Regex.IsMatch(entry.LayoutText,comboBoxLayoutText.Text,
 			  RegexOptions.IgnoreCase))
 	return;
 
-      if (! Regex.IsMatch(key.GetValue("Layout File").ToString(),
-			  comboBoxLayoutFile.Text,
+      if (! Regex.IsMatch(entry.LayoutFile,comboBoxLayoutFile.Text,
 			  RegexOptions.IgnoreCase))
 	return;
 
 #if USE_CLASS_ENTRY
-      entries.Add(new Entry(name));
+      entries.Add(entry);
 #else
       dgv.Rows.Add(new[] {name.ToUpper(),
 			  key.GetValue("Layout Text").ToString(),
