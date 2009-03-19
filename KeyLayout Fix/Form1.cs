@@ -57,8 +57,7 @@ using System.Windows.Forms;
 
 using Microsoft.Win32;
 using System.Text.RegularExpressions;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using Microsoft.CSharp.TestTools.UnitTesting;
+using System.Diagnostics;
 
 namespace KeyLayout_Fixer
 {
@@ -92,6 +91,7 @@ namespace KeyLayout_Fixer
 
     private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
     {
+#if false
       if (e.RowIndex < 0) return;
       var r = dgv.Rows[e.RowIndex];
 //      MessageBox.Show("(" + e.ColumnIndex + "," + e.RowIndex + "): " +
@@ -99,20 +99,42 @@ namespace KeyLayout_Fixer
       Registry.LocalMachine.OpenSubKey(registryPath + @"\" +
 				       r.Cells[0].Value, true).
 	SetValue("Layout File", r.Cells[e.ColumnIndex].Value);
+#endif
     }
 
     //
 #if USE_CLASS_ENTRY
     private class Entry {
-      public Entry(string keyName, string layoutText, string layoutFile) {
+      //public Entry(string keyName, string layoutText, string layoutFile) {
+      public Entry(string keyName) {
 	KeyName = keyName;
-	LayoutText = layoutText;
-	LayoutFile = layoutFile;
+	//LayoutText = layoutText;
+	//LayoutFile = layoutFile;
       }
 
-      public string KeyName { get; set; }
-      public string LayoutText { get; set; }
-      public string LayoutFile { get; set; }
+      private string _keyName;
+      private RegistryKey _key;
+      public string KeyName {
+	get {
+	  return _keyName;
+	}
+	private set {
+	  _keyName = value.ToUpper();
+	  _key = Registry.LocalMachine.OpenSubKey(registryPath + @"\" + _keyName, true);
+	}
+      }
+      public string LayoutText {
+	get { return _key.GetValue("Layout Text").ToString(); }
+	//set { Debug.Assert(false); }
+      }
+      public string LayoutFile {
+	get { return _key.GetValue("Layout File").ToString().ToLower(); }
+	set {
+	  //Debug.Assert(false);
+	  //MessageBox.Show(_keyName + ": " + value);
+	  _key.SetValue("Layout File", value);
+	}
+      }
     }
 
 #  if USE_ENTRIES_CLEAR
@@ -160,9 +182,10 @@ namespace KeyLayout_Fixer
 	return;
 
 #if USE_CLASS_ENTRY
-      entries.Add(new Entry(name.ToUpper(),
-		  key.GetValue("Layout Text").ToString(),
-		  key.GetValue("Layout File").ToString().ToLower()));
+//      entries.Add(new Entry(name,
+//		  key.GetValue("Layout Text").ToString(),
+//		  key.GetValue("Layout File").ToString().ToLower()));
+      entries.Add(new Entry(name));
 #else
       dgv.Rows.Add(new[] {name.ToUpper(),
 			  key.GetValue("Layout Text").ToString(),
