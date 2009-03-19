@@ -43,7 +43,6 @@
 // HKLM,"system\currentcontrolset\control\keyboard layouts\E0120411","IME file",,"FAKEIMEU.IME"
 // HKLM,"software\microsoft\fakeime\u"
 
-#define USE_CLASS_ENTRY
 #undef USE_ENTRIES_CLEAR // うまくいかない
 
 using System;
@@ -90,7 +89,7 @@ namespace KeyLayout_Fixer
     const string registryPath = @"system\CurrentControlSet\Control\Keyboard Layouts";
 
     //
-#if USE_CLASS_ENTRY
+
     private class Entry {
       private string _keyName;
       private RegistryKey _key;
@@ -112,12 +111,8 @@ namespace KeyLayout_Fixer
       }
     }
 
-#  if USE_ENTRIES_CLEAR
-    private List<Entry> entries = new List<Entry>();
-#  else
     private List<Entry> entries;
-#  endif
-#endif
+
     //
 
     private void search()
@@ -125,15 +120,11 @@ namespace KeyLayout_Fixer
 #if USE_BUTTON_APPLY
       buttonApply.Enabled = false;
 #endif
-#if USE_CLASS_ENTRY
 #  if USE_ENTRIES_CLEAR
       if (entries != null) entries.Clear();
 #  else
       entries = new List<Entry>();
 #  endif
-#else
-      dgv.Rows.Clear();
-#endif
       var rKey = Registry.LocalMachine.OpenSubKey(registryPath);
       foreach (var name in rKey.GetSubKeyNames())
 	evalSubKey(rKey, name);
@@ -154,13 +145,7 @@ namespace KeyLayout_Fixer
 			  RegexOptions.IgnoreCase))
 	return;
 
-#if USE_CLASS_ENTRY
       entries.Add(entry);
-#else
-      dgv.Rows.Add(new[] {name.ToUpper(),
-			  key.GetValue("Layout Text").ToString(),
-			  key.GetValue("Layout File").ToString().ToLower()});
-#endif
     }
   }
 }
