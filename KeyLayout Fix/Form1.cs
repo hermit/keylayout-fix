@@ -43,7 +43,8 @@
 // HKLM,"system\currentcontrolset\control\keyboard layouts\E0120411","IME file",,"FAKEIMEU.IME"
 // HKLM,"software\microsoft\fakeime\u"
 
-#define USE_ENTRY_CLASS
+#define USE_CLASS_ENTRY
+#undef USE_ENTRIES_CLEAR // うまくいかない
 
 using System;
 using System.Collections.Generic;
@@ -86,11 +87,24 @@ namespace KeyLayout_Fixer
     }
 
     //
-#if USE_ENTRY_CLASS
-    public class Entry
+
+    const string registryPath = @"system\CurrentControlSet\Control\Keyboard Layouts";
+
+    private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
     {
-      public Entry(string keyName, string layoutText, string layoutFile)
-      {
+      if (e.RowIndex < 0) return;
+      var r = dgv.Rows[e.RowIndex];
+//      MessageBox.Show("(" + e.ColumnIndex + "," + e.RowIndex + "): " +
+//			r.Cells[0].Value + ": " + r.Cells[e.ColumnIndex].Value);
+      Registry.LocalMachine.OpenSubKey(registryPath + @"\" +
+				       r.Cells[0].Value, true).
+	SetValue("Layout File", r.Cells[e.ColumnIndex].Value);
+    }
+
+    //
+#if USE_CLASS_ENTRY
+    public class Entry {
+      public Entry(string keyName, string layoutText, string layoutFile) {
 	KeyName = keyName;
 	LayoutText = layoutText;
 	LayoutFile = layoutFile;
@@ -101,21 +115,12 @@ namespace KeyLayout_Fixer
       public string LayoutFile { get; set; }
     }
 
+#  if USE_ENTRIES_CLEAR
+    private List<Entry> entries = new List<Entry>();
+#  else
     private List<Entry> entries;
-    //private List<Entry> entries = new List<Entry>();
+#  endif
 #endif
-    //
-
-    const string registryPath = @"system\CurrentControlSet\Control\Keyboard Layouts";
-
-    private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-    {
-      if (e.RowIndex < 0) return;
-      var r = dgv.Rows[e.RowIndex];
-      var key = Registry.LocalMachine.OpenSubKey(registryPath + @"\" + r.Cells[0].Value.ToString(), true);
-      key.SetValue("Layout File", r.Cells[e.ColumnIndex].Value.ToString());
-    }
-
     //
 
     private void search()
@@ -123,17 +128,19 @@ namespace KeyLayout_Fixer
 #if USE_BUTTON_APPLY
       buttonApply.Enabled = false;
 #endif
-#if USE_ENTRY_CLASS
+#if USE_CLASS_ENTRY
+#  if USE_ENTRIES_CLEAR
+      if (entries != null) entries.Clear();
+#  else
       entries = new List<Entry>();
-      //if (entries != null)
-      //  entries.Clear();
+#  endif
 #else
       dgv.Rows.Clear();
 #endif
       var rKey = Registry.LocalMachine.OpenSubKey(registryPath);
       foreach (var name in rKey.GetSubKeyNames())
 	evalSubKey(rKey, name);
-      dgv.DataSource = entries;
+      entryBindingSource.DataSource = entries;
     }
 
     private void evalSubKey(RegistryKey rKey, string name) {
@@ -152,7 +159,7 @@ namespace KeyLayout_Fixer
 			  RegexOptions.IgnoreCase))
 	return;
 
-#if USE_ENTRY_CLASS
+#if USE_CLASS_ENTRY
       entries.Add(new Entry(name.ToUpper(),
 		  key.GetValue("Layout Text").ToString(),
 		  key.GetValue("Layout File").ToString().ToLower()));
