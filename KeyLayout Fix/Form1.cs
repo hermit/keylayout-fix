@@ -103,7 +103,7 @@ namespace KeyLayout_Fixer
 
     //
 #if USE_CLASS_ENTRY
-    public class Entry {
+    private class Entry {
       public Entry(string keyName, string layoutText, string layoutFile) {
 	KeyName = keyName;
 	LayoutText = layoutText;
