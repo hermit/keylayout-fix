@@ -143,7 +143,6 @@
       this.dgv.RowTemplate.Height = 21;
       this.dgv.Size = new System.Drawing.Size(425, 153);
       this.dgv.TabIndex = 3;
-      this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellValueChanged);
       // 
       // keyNameDataGridViewTextBoxColumn
       // 
