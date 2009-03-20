@@ -137,7 +137,6 @@
             this.layoutTextDataGridViewTextBoxColumn,
             this.layoutFileDataGridViewComboBoxColumn});
       this.dgv.DataSource = this.entryBindingSource;
-      this.dgv.ImeMode = System.Windows.Forms.ImeMode.Disable;
       this.dgv.Location = new System.Drawing.Point(13, 118);
       this.dgv.Name = "dgv";
       this.dgv.RowTemplate.Height = 21;
