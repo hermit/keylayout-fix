@@ -55,17 +55,25 @@ using System.Text;
 using System.Windows.Forms;
 
 using Microsoft.Win32;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 
-namespace KeyLayout_Fixer
-{
-  public partial class Form1 : Form
-  {
+namespace KeyLayout_Fixer {
+  public partial class Form1 : Form {
+    private void InitLayoutFileList() {
+      var dir = Environment.GetFolderPath(Environment.SpecialFolder.System);
+      var files = Directory.GetFiles(dir, "kbd*.dll");
+      for (int i = 0; i < files.Length; ++i)
+	files[i] = Path.GetFileName(files[i]).ToLower();
+      layoutFileDataGridViewComboBoxColumn.Items.AddRange(files);
+    }
+
     public Form1()
     {
       InitializeComponent();
 
+      InitLayoutFileList();
       search();
     }
 
@@ -91,23 +99,23 @@ namespace KeyLayout_Fixer
     //
 
     private class Entry {
-      private string _keyName;
-      private RegistryKey _key;
+      private string keyName;
+      private RegistryKey key;
 
       public Entry(string keyName) {
-	_keyName = keyName.ToUpper();
-	_key = Registry.LocalMachine.OpenSubKey(registryPath + @"\" + _keyName, true);
+	this.keyName = keyName.ToUpper();
+	key = Registry.LocalMachine.OpenSubKey(registryPath + @"\" + keyName, true);
       }
 
       public string KeyName {
-	get { return _keyName; }
+	get { return keyName; }
       }
       public string LayoutText {
-	get { return _key.GetValue("Layout Text").ToString(); }
+	get { return key.GetValue("Layout Text").ToString(); }
       }
       public string LayoutFile {
-	get { return _key.GetValue("Layout File").ToString().ToLower(); }
-	set { _key.SetValue("Layout File", value); }
+	get { return key.GetValue("Layout File").ToString().ToLower(); }
+	set { key.SetValue("Layout File", value); }
       }
     }
 
@@ -115,16 +123,15 @@ namespace KeyLayout_Fixer
 
     //
 
-    private void search()
-    {
+    private void search() {
 #if USE_BUTTON_APPLY
       buttonApply.Enabled = false;
 #endif
-#  if USE_ENTRIES_CLEAR
+#if USE_ENTRIES_CLEAR
       if (entries != null) entries.Clear();
-#  else
+#else
       entries = new List<Entry>();
-#  endif
+#endif
       var rKey = Registry.LocalMachine.OpenSubKey(registryPath);
       foreach (var name in rKey.GetSubKeyNames())
 	evalSubKey(rKey, name);

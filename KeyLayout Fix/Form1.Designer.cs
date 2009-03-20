@@ -37,10 +37,10 @@
       this.label1 = new System.Windows.Forms.Label();
       this.comboBoxLayoutText = new System.Windows.Forms.ComboBox();
       this.dgv = new System.Windows.Forms.DataGridView();
+      this.entryBindingSource = new System.Windows.Forms.BindingSource(this.components);
       this.keyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.layoutTextDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.layoutFileDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.entryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+      this.layoutFileDataGridViewComboBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
       this.groupBox1.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.entryBindingSource)).BeginInit();
@@ -135,7 +135,7 @@
       this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.keyNameDataGridViewTextBoxColumn,
             this.layoutTextDataGridViewTextBoxColumn,
-            this.layoutFileDataGridViewTextBoxColumn});
+            this.layoutFileDataGridViewComboBoxColumn});
       this.dgv.DataSource = this.entryBindingSource;
       this.dgv.ImeMode = System.Windows.Forms.ImeMode.Disable;
       this.dgv.Location = new System.Drawing.Point(13, 118);
@@ -143,6 +143,10 @@
       this.dgv.RowTemplate.Height = 21;
       this.dgv.Size = new System.Drawing.Size(425, 153);
       this.dgv.TabIndex = 3;
+      // 
+      // entryBindingSource
+      // 
+      this.entryBindingSource.DataSource = typeof(KeyLayout_Fixer.Form1.Entry);
       // 
       // keyNameDataGridViewTextBoxColumn
       // 
@@ -161,17 +165,15 @@
       this.layoutTextDataGridViewTextBoxColumn.Name = "layoutTextDataGridViewTextBoxColumn";
       this.layoutTextDataGridViewTextBoxColumn.ReadOnly = true;
       // 
-      // layoutFileDataGridViewTextBoxColumn
+      // layoutFileDataGridViewComboBoxColumn
       // 
-      this.layoutFileDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.layoutFileDataGridViewTextBoxColumn.DataPropertyName = "LayoutFile";
-      this.layoutFileDataGridViewTextBoxColumn.HeaderText = "LayoutFile";
-      this.layoutFileDataGridViewTextBoxColumn.Name = "layoutFileDataGridViewTextBoxColumn";
-      this.layoutFileDataGridViewTextBoxColumn.Width = 83;
-      // 
-      // entryBindingSource
-      // 
-      this.entryBindingSource.DataSource = typeof(KeyLayout_Fixer.Form1.Entry);
+      this.layoutFileDataGridViewComboBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.layoutFileDataGridViewComboBoxColumn.DataPropertyName = "LayoutFile";
+      this.layoutFileDataGridViewComboBoxColumn.HeaderText = "LayoutFile";
+      this.layoutFileDataGridViewComboBoxColumn.Name = "layoutFileDataGridViewComboBoxColumn";
+      this.layoutFileDataGridViewComboBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.layoutFileDataGridViewComboBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+      this.layoutFileDataGridViewComboBoxColumn.Width = 83;
       // 
       // Form1
       // 
@@ -203,6 +205,6 @@
     private System.Windows.Forms.BindingSource entryBindingSource;
     private System.Windows.Forms.DataGridViewTextBoxColumn keyNameDataGridViewTextBoxColumn;
     private System.Windows.Forms.DataGridViewTextBoxColumn layoutTextDataGridViewTextBoxColumn;
-    private System.Windows.Forms.DataGridViewTextBoxColumn layoutFileDataGridViewTextBoxColumn;
+    private System.Windows.Forms.DataGridViewComboBoxColumn layoutFileDataGridViewComboBoxColumn;
   }
 }
