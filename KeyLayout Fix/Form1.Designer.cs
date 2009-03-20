@@ -53,7 +53,7 @@
       this.comboBoxKeyName.FormattingEnabled = true;
       this.comboBoxKeyName.Location = new System.Drawing.Point(82, 18);
       this.comboBoxKeyName.Name = "comboBoxKeyName";
-      this.comboBoxKeyName.Size = new System.Drawing.Size(327, 20);
+      this.comboBoxKeyName.Size = new System.Drawing.Size(342, 20);
       this.comboBoxKeyName.TabIndex = 2;
       this.comboBoxKeyName.Text = "0411$";
       this.comboBoxKeyName.TextUpdate += new System.EventHandler(this.comboBoxKeyName_TextUpdate);
@@ -79,7 +79,7 @@
       this.groupBox1.Controls.Add(this.comboBoxKeyName);
       this.groupBox1.Location = new System.Drawing.Point(12, 12);
       this.groupBox1.Name = "groupBox1";
-      this.groupBox1.Size = new System.Drawing.Size(426, 99);
+      this.groupBox1.Size = new System.Drawing.Size(441, 99);
       this.groupBox1.TabIndex = 0;
       this.groupBox1.TabStop = false;
       this.groupBox1.Text = "パターン (正規表現)";
@@ -100,7 +100,7 @@
       this.comboBoxLayoutFile.FormattingEnabled = true;
       this.comboBoxLayoutFile.Location = new System.Drawing.Point(82, 69);
       this.comboBoxLayoutFile.Name = "comboBoxLayoutFile";
-      this.comboBoxLayoutFile.Size = new System.Drawing.Size(327, 20);
+      this.comboBoxLayoutFile.Size = new System.Drawing.Size(342, 20);
       this.comboBoxLayoutFile.TabIndex = 6;
       this.comboBoxLayoutFile.TextUpdate += new System.EventHandler(this.comboBoxLayoutFile_TextUpdate);
       // 
@@ -120,7 +120,7 @@
       this.comboBoxLayoutText.FormattingEnabled = true;
       this.comboBoxLayoutText.Location = new System.Drawing.Point(82, 43);
       this.comboBoxLayoutText.Name = "comboBoxLayoutText";
-      this.comboBoxLayoutText.Size = new System.Drawing.Size(327, 20);
+      this.comboBoxLayoutText.Size = new System.Drawing.Size(342, 20);
       this.comboBoxLayoutText.TabIndex = 4;
       this.comboBoxLayoutText.TextUpdate += new System.EventHandler(this.comboBoxLayoutText_TextUpdate);
       // 
@@ -141,7 +141,7 @@
       this.dgv.Location = new System.Drawing.Point(13, 118);
       this.dgv.Name = "dgv";
       this.dgv.RowTemplate.Height = 21;
-      this.dgv.Size = new System.Drawing.Size(425, 153);
+      this.dgv.Size = new System.Drawing.Size(440, 151);
       this.dgv.TabIndex = 3;
       // 
       // entryBindingSource
@@ -179,7 +179,7 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(450, 283);
+      this.ClientSize = new System.Drawing.Size(465, 281);
       this.Controls.Add(this.dgv);
       this.Controls.Add(this.groupBox1);
       this.Name = "Form1";

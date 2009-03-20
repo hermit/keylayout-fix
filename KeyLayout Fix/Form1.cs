@@ -69,26 +69,22 @@ namespace KeyLayout_Fixer {
       layoutFileDataGridViewComboBoxColumn.Items.AddRange(files);
     }
 
-    public Form1()
-    {
+    public Form1() {
       InitializeComponent();
 
       InitLayoutFileList();
       search();
     }
 
-    private void comboBoxKeyName_TextUpdate(object sender, EventArgs e)
-    {
+    private void comboBoxKeyName_TextUpdate(object sender, EventArgs e) {
       search();
     }
 
-    private void comboBoxLayoutText_TextUpdate(object sender, EventArgs e)
-    {
+    private void comboBoxLayoutText_TextUpdate(object sender, EventArgs e) {
       search();
     }
 
-    private void comboBoxLayoutFile_TextUpdate(object sender, EventArgs e)
-    {
+    private void comboBoxLayoutFile_TextUpdate(object sender, EventArgs e) {
       search();
     }
 
